@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+
+import { data } from "./data";
+
+import Header from "./components/header/header";
+import Home from "./pages/home/home";
+import DetailsPage from "./pages/details/details";
+import { Route, Routes } from "react-router-dom";
+
 
 function App() {
+  const [block, setBlock] = useState(data);
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex flex-col items-center ">
+      <Header />
+        <Routes>
+          <Route path='/' element={ <Home data={block} /> } />
+          <Route path='details' element={ <DetailsPage />} />
+        </Routes>
+        
     </div>
   );
 }
