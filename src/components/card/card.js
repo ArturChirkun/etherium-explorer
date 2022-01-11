@@ -2,21 +2,20 @@ import React from "react";
 
 import CardItem from "../card-item/card-item";
 
-const Card = ({ data }) => {
+const Card = ({ data, checkDetails }) => {
   return (
     <div className="w-100% border rounded-md shadow-xl">
       <div className="p-3 border-b">Header</div>
       <div className="p-3">
         <div className="h-96 hover:overflow-y-scroll hover:scroll-m-3 overflow-hidden ">
-          {data.map((block) => (
+          {data?.map((block) => (
             <CardItem
-              key={block.id}
-              numberOfBlock={block.numberOfBlock}
-              time={block.time}
-              user={block.user}
-              numberOfTransactions={block.numberOfTransactions}
-              etherium={block.etherium}
-              whatCardItem={block.whatCardItem}
+              key={block.blockNumber}
+              numberOfBlock={block.blockNumber}
+              timeStamp={block.timeStamp}
+              blockMiner={block.blockMiner}
+              blockReward={block.blockReward}
+              checkDetails={checkDetails}
             />
           ))}
         </div>
