@@ -2,11 +2,21 @@ import React from "react";
 
 import Card from "../../components/card/card";
 
-const Home = ({ data }) => {
+import Spinner from "../../components/spinner/spinner";
+
+const Home = ({ data, checkDetails }) => {
   return (
-    <div className="grid gap-5 grid-cols-2 w-10/12 m-auto">
-      <Card data={data} />
-      <Card data={data} />
+    <div className="w-11/12 m-auto">
+      {data?.length ? (
+        <div className="grid gap-5 grid-cols-2 w-full m-auto">
+          <Card data={data} checkDetails={checkDetails} />
+          <Card data={data} checkDetails={checkDetails} />
+        </div>
+      ) : (
+        <div className="flex w-full items-center justify-center">
+          <Spinner />
+        </div>
+      )}
     </div>
   );
 };

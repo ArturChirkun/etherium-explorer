@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import Overview from "../../components/overview/overview";
 
-const DetailsPage = () => {
+const DetailsPage = ({ block }) => {
   return (
     <div className="flex flex-col items-center justify-center w-8/12">
       <div className="flex border rounded-t-md w-full">
@@ -13,7 +14,10 @@ const DetailsPage = () => {
           Comments
         </div>
       </div>
-      <Overview number={12124124} />
+      <Overview block={block} />
+      <div className=" mt-4 font-bold">
+        <Link to="/"> Back </Link>
+      </div>
     </div>
   );
 };
