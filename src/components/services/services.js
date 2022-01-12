@@ -41,9 +41,7 @@ class EthereumExplorerService {
         blocks.push(block);
         counter++;
         console.log(block)
-      } else {
-        return;
-      }
+      } 
     }, 500);
     return blocks;
   };

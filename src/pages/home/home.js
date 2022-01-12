@@ -6,10 +6,9 @@ import Spinner from "../../components/spinner/spinner";
 
 const Home = ({ data, checkDetails }) => {
   return (
-    <div className="w-11/12 m-auto">
+    <div className="w-6/12 m-auto">
       {data?.length ? (
-        <div className="grid gap-5 grid-cols-2 w-full m-auto">
-          <Card data={data} checkDetails={checkDetails} />
+        <div className=" w-full m-auto">
           <Card data={data} checkDetails={checkDetails} />
         </div>
       ) : (
