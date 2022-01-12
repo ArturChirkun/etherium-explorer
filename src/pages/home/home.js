@@ -4,12 +4,12 @@ import Card from "../../components/card/card";
 
 import Spinner from "../../components/spinner/spinner";
 
-const Home = ({ data, checkDetails }) => {
+const Home = ({ blocks, checkDetails }) => {
   return (
     <div className="w-6/12 m-auto">
-      {data?.length ? (
+      {blocks?.length ? (
         <div className=" w-full m-auto">
-          <Card data={data} checkDetails={checkDetails} />
+          <Card blocks={blocks} checkDetails={checkDetails} />
         </div>
       ) : (
         <div className="flex w-full items-center justify-center">

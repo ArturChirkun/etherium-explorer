@@ -4,13 +4,14 @@ import "./App.css";
 import Header from "./components/header/header";
 import Home from "./pages/home/home";
 import DetailsPage from "./pages/details/details";
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { ethereumExplorerService } from "./components/services/services";
+import Saved from "./pages/saved/saved";
 
 function App() {
   const [blocks, setBlock] = useState();
   const [detailsOfBlock, setDetailsOfBlock] = useState({});
-
+  const [savedBlocks, setSavedBlocks] = useState([]);
   useEffect(() => {
     let addBlocks = ethereumExplorerService.getBlocks();
     const timer = setTimeout(() => {
@@ -28,18 +29,32 @@ function App() {
     );
   };
 
+  const saveBlock = (numberOfBlock) => {
+    const newBlock = blocks.find(
+      (block) => block.blockNumber === numberOfBlock
+    );
+    const checkOnMatching = savedBlocks.find(
+      (block) => block.blockNumber === numberOfBlock
+    );
+
+   return !checkOnMatching
+      ? setSavedBlocks([...savedBlocks, newBlock])
+      : alert("this block is already saved");
+  };
+
   return (
     <div className="flex flex-col items-center ">
       <Header />
       <Routes>
         <Route
           path="/"
-          element={<Home data={blocks} checkDetails={checkDetails} />}
+          element={<Home blocks={blocks} checkDetails={checkDetails} />}
         />
         <Route
           path="details"
           element={<DetailsPage block={detailsOfBlock} />}
         />
+        <Route path="saved" element={<Saved blocks={savedBlocks} saveBlock={saveBlock}/>} />
       </Routes>
     </div>
   );

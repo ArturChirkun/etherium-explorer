@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import CardItem from "../card-item/card-item";
 
-const Card = ({ data, checkDetails }) => {
+const Card = ({ blocks, checkDetails, saveBlock }) => {
   const [toggleButton, setToggleButton] = useState("View all blocks");
 
   const viewAllBlocks = () => {
@@ -20,7 +20,7 @@ const Card = ({ data, checkDetails }) => {
       <div className="p-3 border-b">Header</div>
       <div className="p-3">
         <div className="h-96 hover:overflow-y-scroll hover:scroll-m-3 overflow-hidden block-scroll">
-          {data?.map((block) => (
+          {blocks?.map((block) => (
             <CardItem
               key={block.blockNumber}
               numberOfBlock={block.blockNumber}
@@ -28,6 +28,7 @@ const Card = ({ data, checkDetails }) => {
               blockMiner={block.blockMiner}
               blockReward={block.blockReward}
               checkDetails={checkDetails}
+              saveBlock={saveBlock}
             />
           ))}
         </div>

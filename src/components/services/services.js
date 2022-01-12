@@ -40,8 +40,8 @@ class EthereumExplorerService {
         const block = await this.getBlockByNumber(blockNumber);
         blocks.push(block);
         counter++;
-        console.log(block)
-      } 
+        console.log(block);
+      }
     }, 500);
     return blocks;
   };
