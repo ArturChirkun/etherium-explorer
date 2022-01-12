@@ -14,7 +14,7 @@ const CardItem = ({
     };
   };
   return (
-    <div className="flex border-b p-3 hover:cursor-pointer">
+    <div className="flex border-b p-3 ">
       <div className="flex w-5/12">
         <div className="flex bg-slate-200 rounded-md mr-3 p-3">BK</div>
         <div className="mr-3 ">
@@ -22,7 +22,7 @@ const CardItem = ({
             {" "}
             <span className="font-bold"> Number of block: </span>{" "}
             <Link to="details">
-              <span onClick={heandlerCheckDetails(numberOfBlock)}>
+              <span className="text-sky-500 hover:cursor-pointer  hover:text-sky-700" onClick={heandlerCheckDetails(numberOfBlock)}>
                 {" "}
                 {numberOfBlock}{" "}
               </span>{" "}
