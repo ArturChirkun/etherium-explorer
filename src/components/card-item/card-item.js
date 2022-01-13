@@ -10,7 +10,9 @@ const CardItem = ({
   blockReward,
   checkDetails,
   saveBlock,
-  deleteBlock
+  deleteBlock,
+  prevBlocks,
+  heandlerNumberForPrevBlocks
 }) => {
   const hof = (func, arg) => {
     return () => {
@@ -44,7 +46,7 @@ const CardItem = ({
           </div>
         </div>
       </div>
-      <div className="flex w-6/12">
+      <div className="flex w-5/12">
         <div>
           <div className="flex ">
             {" "}
@@ -55,23 +57,30 @@ const CardItem = ({
           </div>
         </div>
       </div>
+
       {saveBlock ? (
         <div
-          className="flex w-2/12 m-auto justify-center "
-          onClick={hof(saveBlock, numberOfBlock)}
+          className="flex w-3/12 m-auto justify-center "
+          
         >
-          <span className=" hover:cursor-pointer">
+          <span className=" flex justify-center w-6/12 hover:cursor-pointer" onClick={hof(saveBlock, numberOfBlock)}>
             <Plus />
           </span>
+          <div className=" flex  m-auto justify-center text-sky-500 hover:cursor-pointer" onClick={hof(heandlerNumberForPrevBlocks, numberOfBlock)}>
+            {" "}
+            <Link to="ten-prev"> Watch 10 prev </Link>
+          </div>
         </div>
-      ) : (        <div
-        className="flex w-2/12 m-auto justify-center "
-        onClick={hof(deleteBlock, numberOfBlock)}
-      >
-        <span className=" hover:cursor-pointer">
-          <Minus />
-        </span>
-      </div>)}
+      ) : !prevBlocks ? (
+        <div
+          className="flex w-1/12 m-auto justify-center "
+          onClick={hof(deleteBlock, numberOfBlock)}
+        >
+          <span className=" hover:cursor-pointer">
+            <Minus />
+          </span>
+        </div>
+      ) : null }
     </div>
   );
 };

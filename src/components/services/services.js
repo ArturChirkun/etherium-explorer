@@ -40,6 +40,20 @@ class EthereumExplorerService {
         const block = await this.getBlockByNumber(blockNumber);
         blocks.push(block);
         counter++;
+      }
+    }, 500);
+    return blocks;
+  };
+
+  getTenPrevBlocks = (numberOfBlock) => {
+    let counter = 0;
+    const blocks = [];
+
+    setInterval(async () => {
+      if (counter < 10) {
+        const block = await this.getBlockByNumber(numberOfBlock - counter - 1);
+        blocks.push(block);
+        counter++;
         console.log(block);
       }
     }, 500);

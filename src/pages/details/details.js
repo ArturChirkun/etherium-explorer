@@ -10,9 +10,6 @@ const DetailsPage = ({ block }) => {
         <div className="mr-1 p-3 text-sky-500 hover:cursor-pointer border-2 border-transparent  border-b-sky-500 ">
           Overview
         </div>
-        <div className="pmr-1 p-3 hover:text-sky-500 hover:cursor-pointer border-2 border-transparent hover:border-b-sky-500 active:border-b-sky-500 ">
-          Comments
-        </div>
       </div>
       <Overview block={block} />
       <div className="w-full flex justify-center">
