@@ -15,8 +15,11 @@ const DetailsPage = ({ block }) => {
         </div>
       </div>
       <Overview block={block} />
-      <div className=" mt-4 font-bold text-2xl hover:text-sky-500">
-        <Link to="/"> Back </Link>
+      <div className="w-full flex justify-center">
+        <button className="bg-sky-200 mt-5 text-sky-500 text-2xl text- p-3 rounded-md hover:bg-sky-500 hover:text-white ">
+          {" "}
+          <Link to="/"> Back </Link>
+        </button>
       </div>
     </div>
   );
