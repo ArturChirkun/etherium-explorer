@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Plus } from "../../assets/iconmonstr-plus-6.svg";
+import { ReactComponent as Minus } from "../../assets/iconmonstr-minus-6.svg";
 
 const CardItem = ({
   numberOfBlock,
@@ -9,36 +10,34 @@ const CardItem = ({
   blockReward,
   checkDetails,
   saveBlock,
+  deleteBlock
 }) => {
-  const heandlerCheckDetails = (numberOfBlock) => {
+  const hof = (func, arg) => {
     return () => {
-      checkDetails(numberOfBlock);
+      func(arg);
     };
   };
 
-  const heandelerSaveBlock = (numberOfBlock) => {
-    return () => {
-      saveBlock(numberOfBlock);
-    };
-  };
   return (
     <div className="flex border-b p-3 ">
       <div className="flex w-4/12">
         <div className="flex bg-slate-200 rounded-md mr-3 p-3">BK</div>
         <div className="mr-3 ">
-          <div>
-            {" "}
-            <span className="font-bold"> Number of block: </span>{" "}
-            <Link to="details">
-              <span
-                className="text-sky-500 hover:cursor-pointer  hover:text-sky-700"
-                onClick={heandlerCheckDetails(numberOfBlock)}
-              >
-                {" "}
-                {numberOfBlock}{" "}
-              </span>{" "}
-            </Link>{" "}
-          </div>
+          {checkDetails && (
+            <div>
+              {" "}
+              <span className="font-bold"> Number of block: </span>{" "}
+              <Link to="/details">
+                <span
+                  className="text-sky-500 hover:cursor-pointer  hover:text-sky-700"
+                  onClick={hof(checkDetails, numberOfBlock)}
+                >
+                  {" "}
+                  {numberOfBlock}{" "}
+                </span>{" "}
+              </Link>{" "}
+            </div>
+          )}
           <div>
             {" "}
             <span className="font-bold"> Timestamp: </span> {timeStamp}
@@ -56,14 +55,23 @@ const CardItem = ({
           </div>
         </div>
       </div>
-      <div className="flex w-2/12 m-auto justify-center">
+      {saveBlock ? (
         <div
-          className=" hover:cursor-pointer"
-          onClick={heandelerSaveBlock(numberOfBlock)}
+          className="flex w-2/12 m-auto justify-center "
+          onClick={hof(saveBlock, numberOfBlock)}
         >
-          <Plus />
+          <span className=" hover:cursor-pointer">
+            <Plus />
+          </span>
         </div>
-      </div>
+      ) : (        <div
+        className="flex w-2/12 m-auto justify-center "
+        onClick={hof(deleteBlock, numberOfBlock)}
+      >
+        <span className=" hover:cursor-pointer">
+          <Minus />
+        </span>
+      </div>)}
     </div>
   );
 };

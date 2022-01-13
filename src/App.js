@@ -17,7 +17,6 @@ function App() {
     const timer = setTimeout(() => {
       setBlock(addBlocks);
     }, 7000);
-
     return () => {
       clearTimeout(timer);
     };
@@ -33,28 +32,52 @@ function App() {
     const newBlock = blocks.find(
       (block) => block.blockNumber === numberOfBlock
     );
+
     const checkOnMatching = savedBlocks.find(
       (block) => block.blockNumber === numberOfBlock
     );
 
-   return !checkOnMatching
+    return !checkOnMatching
       ? setSavedBlocks([...savedBlocks, newBlock])
       : alert("this block is already saved");
   };
 
+  const deleteBlock = (numberOfBlock) => {
+    const newArr = savedBlocks.filter((block) => block.blockNumber !== numberOfBlock );
+    const checkOnMatching = savedBlocks.find(
+      (block) => block.blockNumber === numberOfBlock
+    );
+
+    checkOnMatching ? setSavedBlocks(newArr) : alert('this block in not saved')
+  };
   return (
     <div className="flex flex-col items-center ">
       <Header />
       <Routes>
         <Route
           path="/"
-          element={<Home blocks={blocks} checkDetails={checkDetails} />}
+          element={
+            <Home
+              blocks={blocks}
+              checkDetails={checkDetails}
+              saveBlock={saveBlock}
+            />
+          }
         />
         <Route
           path="details"
           element={<DetailsPage block={detailsOfBlock} />}
         />
-        <Route path="saved" element={<Saved blocks={savedBlocks} saveBlock={saveBlock}/>} />
+        <Route
+          path="saved"
+          element={
+            <Saved
+              blocks={savedBlocks}
+              checkDetails={checkDetails}
+              deleteBlock={deleteBlock}
+            />
+          }
+        />
       </Routes>
     </div>
   );
