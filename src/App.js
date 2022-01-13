@@ -7,11 +7,13 @@ import DetailsPage from "./pages/details/details";
 import { Route, Routes } from "react-router-dom";
 import { ethereumExplorerService } from "./components/services/services";
 import Saved from "./pages/saved/saved";
+import PrevBlocks from "./pages/prevblocks/prevblocks";
 
 function App() {
   const [blocks, setBlock] = useState();
   const [detailsOfBlock, setDetailsOfBlock] = useState({});
   const [savedBlocks, setSavedBlocks] = useState([]);
+  const [numberForPrevBlocks, setNumberForPrevBlocks] = useState()
   useEffect(() => {
     let addBlocks = ethereumExplorerService.getBlocks();
     const timer = setTimeout(() => {
@@ -50,6 +52,10 @@ function App() {
 
     checkOnMatching ? setSavedBlocks(newArr) : alert('this block in not saved')
   };
+
+  const heandlerNumberForPrevBlocks = (numberOfBlock) => {
+    setNumberForPrevBlocks(numberOfBlock);
+  }
   return (
     <div className="flex flex-col items-center ">
       <Header />
@@ -61,6 +67,7 @@ function App() {
               blocks={blocks}
               checkDetails={checkDetails}
               saveBlock={saveBlock}
+              heandlerNumberForPrevBlocks={heandlerNumberForPrevBlocks}
             />
           }
         />
@@ -78,6 +85,7 @@ function App() {
             />
           }
         />
+        <Route path='ten-prev' element={ <PrevBlocks numberOfBlock={numberForPrevBlocks}/> }/>
       </Routes>
     </div>
   );

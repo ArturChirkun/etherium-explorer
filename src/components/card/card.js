@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import CardItem from "../card-item/card-item";
 
-const Card = ({ blocks, checkDetails, saveBlock, deleteBlock }) => {
+const Card = ({ blocks, checkDetails, saveBlock, deleteBlock, prevBlocks, heandlerNumberForPrevBlocks }) => {
   const [toggleButton, setToggleButton] = useState("View all blocks");
 
   const viewAllBlocks = () => {
@@ -17,21 +17,29 @@ const Card = ({ blocks, checkDetails, saveBlock, deleteBlock }) => {
   };
   return (
     <div className="w-100% border rounded-md shadow-xl">
-      <div className="p-3 border-b font-bold text-2xl text-center"> {saveBlock ? "All blocks" : 'Saved blocks'} </div>
+      <div className="p-3 border-b font-bold text-2xl text-center">
+        {" "}
+        
+        {prevBlocks ? 'Prev 10 blocks' : saveBlock ? 'All blocks' : 'Saved blocks' }{" "}
+      </div>
       <div className="p-3">
         <div className="h-96 hover:overflow-y-scroll hover:scroll-m-3 overflow-hidden block-scroll">
-          {blocks?.map((block, idx) => (
-            <CardItem
-              key={idx}
-              numberOfBlock={block.blockNumber}
-              timeStamp={block.timeStamp}
-              blockMiner={block.blockMiner}
-              blockReward={block.blockReward}
-              checkDetails={checkDetails}
-              saveBlock={saveBlock}
-              deleteBlock={deleteBlock}
-            />
-          ))}
+          {blocks?.map((block, idx) =>
+            block.blockNumber ? (
+              <CardItem
+                key={idx}
+                numberOfBlock={block.blockNumber}
+                timeStamp={block.timeStamp}
+                blockMiner={block.blockMiner}
+                blockReward={block.blockReward}
+                checkDetails={checkDetails}
+                saveBlock={saveBlock}
+                deleteBlock={deleteBlock}
+                prevBlocks={prevBlocks}
+                heandlerNumberForPrevBlocks={heandlerNumberForPrevBlocks}
+              />
+            ) : null
+          )}
         </div>
       </div>
 
