@@ -1,16 +1,26 @@
-import React from "react";
+import React, {useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Card from "../../components/card/card";
+import {
+  getBlocksFromLocalStorage,
+  setBlocksInLocalStorage,
+} from "../prevblocks/local-storage";
 
+const Saved = ({ savedBlocks, checkDetails, deleteBlock }) => {
+  const [savedBlocks1, setSavedBlocks] = useState(getBlocksFromLocalStorage());
+ 
+  useEffect(() => {
+    console.log('new saved block', savedBlocks1)
+    setBlocksInLocalStorage(savedBlocks1);
+  }, []);
 
-const Saved = ({ blocks, checkDetails, deleteBlock }) => {
   return (
     <div className="w-7/12 m-auto">
-      {blocks.length !== 0 ? (
+      {savedBlocks.length !== 0 ? (
         <div className=" w-full m-auto">
           <Card
-            blocks={blocks}
+            blocks={savedBlocks}
             checkDetails={checkDetails}
             deleteBlock={deleteBlock}
           />

@@ -5,7 +5,7 @@ import Header from "./components/header/header";
 import Home from "./pages/home/home";
 import DetailsPage from "./pages/details/details";
 import { Route, Routes } from "react-router-dom";
-import { ethereumExplorerService } from "./components/services/services";
+import { ethereumExplorerService } from "./components/services/ethrereumApi";
 import Saved from "./pages/saved/saved";
 import PrevBlocks from "./pages/prevblocks/prevblocks";
 
@@ -13,7 +13,7 @@ function App() {
   const [blocks, setBlock] = useState();
   const [detailsOfBlock, setDetailsOfBlock] = useState({});
   const [savedBlocks, setSavedBlocks] = useState([]);
-  const [numberForPrevBlocks, setNumberForPrevBlocks] = useState()
+  const [numberForPrevBlocks, setNumberForPrevBlocks] = useState();
   useEffect(() => {
     let addBlocks = ethereumExplorerService.getBlocks();
     const timer = setTimeout(() => {
@@ -36,26 +36,28 @@ function App() {
     );
 
     const checkOnMatching = savedBlocks.find(
-      (block) => block.blockNumber === numberOfBlock
+      (block) => block.blockNumber === newBlock.blockNumber
     );
-
-    return !checkOnMatching
+    //console.log(savedBlocks)
+    !checkOnMatching
       ? setSavedBlocks([...savedBlocks, newBlock])
       : alert("this block is already saved");
   };
 
   const deleteBlock = (numberOfBlock) => {
-    const newArr = savedBlocks.filter((block) => block.blockNumber !== numberOfBlock );
+    const newArr = savedBlocks.filter(
+      (block) => block.blockNumber !== numberOfBlock
+    );
     const checkOnMatching = savedBlocks.find(
       (block) => block.blockNumber === numberOfBlock
     );
 
-    checkOnMatching ? setSavedBlocks(newArr) : alert('this block in not saved')
+    checkOnMatching ? setSavedBlocks(newArr) : alert("this block is not saved");
   };
 
   const heandlerNumberForPrevBlocks = (numberOfBlock) => {
     setNumberForPrevBlocks(numberOfBlock);
-  }
+  };
   return (
     <div className="flex flex-col items-center ">
       <Header />
@@ -79,13 +81,21 @@ function App() {
           path="saved"
           element={
             <Saved
-              blocks={savedBlocks}
               checkDetails={checkDetails}
               deleteBlock={deleteBlock}
+              savedBlocks={savedBlocks}
             />
           }
         />
-        <Route path='ten-prev' element={ <PrevBlocks numberOfBlock={numberForPrevBlocks}/> }/>
+        <Route
+          path="ten-prev"
+          element={
+            <PrevBlocks
+              numberOfBlock={numberForPrevBlocks}
+              checkDetails={checkDetails}
+            />
+          }
+        />
       </Routes>
     </div>
   );

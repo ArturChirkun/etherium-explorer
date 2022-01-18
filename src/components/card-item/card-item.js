@@ -29,6 +29,7 @@ const CardItem = ({
             <div>
               {" "}
               <span className="font-bold"> Number of block: </span>{" "}
+              {prevBlocks ? (<span> {numberOfBlock} </span>) : ( 
               <Link to="/details">
                 <span
                   className="text-sky-500 hover:cursor-pointer  hover:text-sky-700"
@@ -37,7 +38,8 @@ const CardItem = ({
                   {" "}
                   {numberOfBlock}{" "}
                 </span>{" "}
-              </Link>{" "}
+              </Link>)}
+
             </div>
           )}
           <div>
