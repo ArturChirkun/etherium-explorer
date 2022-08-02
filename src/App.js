@@ -38,7 +38,6 @@ function App() {
     const checkOnMatching = savedBlocks.find(
       (block) => block.blockNumber === newBlock.blockNumber
     );
-    //console.log(savedBlocks)
     !checkOnMatching
       ? setSavedBlocks([...savedBlocks, newBlock])
       : alert("this block is already saved");

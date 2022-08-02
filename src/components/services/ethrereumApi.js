@@ -9,23 +9,25 @@ class EthereumExplorerService {
   API_KEY = `3FN3Y4IQDQWSK46ZJQS24QCQ5JF8YA1BU1`;
 
   getBlockNumberByTimestamp = async (timestamp) => {
-    const numberOfBlockByTimestamp = await axios
-      .get(
+    try {
+      const numberOfBlockByTimestamp = await axios.get(
         `https://api.etherscan.io/api?module=block&action=getblocknobytime&timestamp=${timestamp}&closest=before&apikey=${this.API_KEY}`
-      )
-      .then((res) => res.data.result)
-      .catch((er) => console.log(er));
-    return numberOfBlockByTimestamp;
+      );
+      return numberOfBlockByTimestamp.data.result;
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   getBlockByNumber = async (number) => {
-    const block = await axios
-      .get(
+    try {
+      const block = await axios.get(
         `https://api.etherscan.io/api?module=block&action=getblockreward&blockno=${number}&apikey=${this.API_KEY}`
-      )
-      .then((res) => res.data.result)
-      .catch((er) => console.log(er));
-    return block;
+      );
+      return block.data.result;
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   getBlocks = () => {
@@ -38,6 +40,7 @@ class EthereumExplorerService {
           this.arrayOfTimestamp[counter]
         );
         const block = await this.getBlockByNumber(blockNumber);
+        console.log(block);
         blocks.push(block);
         counter++;
       }
@@ -54,7 +57,6 @@ class EthereumExplorerService {
         const block = await this.getBlockByNumber(numberOfBlock - counter - 1);
         blocks.push(block);
         counter++;
-        console.log(block);
       }
     }, 500);
     return blocks;

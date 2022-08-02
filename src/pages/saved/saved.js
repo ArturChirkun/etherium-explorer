@@ -11,7 +11,6 @@ const Saved = ({ savedBlocks, checkDetails, deleteBlock }) => {
   const [savedBlocks1, setSavedBlocks] = useState(getBlocksFromLocalStorage());
  
   useEffect(() => {
-    console.log('new saved block', savedBlocks1)
     setBlocksInLocalStorage(savedBlocks1);
   }, []);
 
